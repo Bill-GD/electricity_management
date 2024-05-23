@@ -19,10 +19,12 @@ $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
       <td><?php echo $value["user_id"]; ?></td>
       <td><?php echo $value["email"]; ?></td>
       <td><?php echo $value["username"]; ?></td>
-      <td><?php echo $value["type"]; ?></td>
+      <td><?php echo $value["type"] === 1 ? 'Admin' : 'User'; ?></td>
       <td>
         <!-- <a href="edit_account.php?id=<?php echo $value["user_id"]; ?>">Edit</a> -->
-        <a href="delete_account.php?user_id=<?php echo $value["user_id"]; ?>">Delete</a>
+        <?php if ($value["type"] === 0) { ?>
+          <a href="../admin/delete_account.php?user_id=<?php echo $value["user_id"]; ?>">Delete</a>
+        <?php } ?>
       </td>
     </tr>
     <?php

@@ -13,10 +13,9 @@ if (isset($_COOKIE['is_logged_in'])) {
     $email = $_COOKIE['email'];
     $is_admin = $_COOKIE['is_admin'];
 
-    echo "Logged in as: {$username} <br> Email: {$email} <br> User ID: {$user_id} <br> Admin: {$is_admin} <br>";
-  } else {
-    echo "Not logged in";
-  }
+    header("Location: main/dashboard.php");
+    exit;
+  } 
 } else {
   echo "Not logged in";
 }

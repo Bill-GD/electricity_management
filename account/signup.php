@@ -1,5 +1,6 @@
 <?php
 include_once "../database.php";
+require_once "../helper/helper_methods.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +9,7 @@ include_once "../database.php";
     <title>Document</title>
   </head>
   <body>
+    <a href="/">Back</a>
     <form method="post">
       Email <input type="text" name="email_signup" required>
       <br>
@@ -17,7 +19,9 @@ include_once "../database.php";
       <br>
       Password Confirm <input type="password" name="password_confirm_signup" required>
       <br>
-      <input type="submit" value="Login">
+      Auto Login <input type="checkbox" name="auto_login">
+      <br>
+      <input type="submit" value="Sign Up">
     </form>
     <?php
     if (isset($_REQUEST["username_signup"])) {
@@ -35,8 +39,21 @@ include_once "../database.php";
         return;
       }
 
-      $sql = "INSERT into `User` (`email`, `username`, `password`, `type`) values ('{$email}', '{$username}', '{$password}', 0)";
-      $user = $db->query($sql);
+      add_user($email, $username, $password);
+
+      if (isset($_REQUEST["auto_login"])) {
+        if (isset($_REQUEST["auto_login"])) {
+          $is_logged_in = true;
+          setcookie('is_logged_in', $is_logged_in, time() + 3600, '/');
+          setcookie('username', $username, time() + 3600, '/');
+          setcookie('user_id', $db->lastInsertId(), time() + 3600, '/');
+          setcookie('email', $email, time() + 3600, '/');
+          setcookie('is_admin', 0, time() + 3600, '/');
+
+          header("Location: ../main/dashboard.php");
+          exit;
+        }
+      }
     }
     ?>
   </body>

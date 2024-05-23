@@ -8,6 +8,7 @@ include_once "../database.php";
     <title>Document</title>
   </head>
   <body>
+    <a href="/">Back</a>
     <form method="post">
       Username <input type="text" name="username_login" required>
       <br>
