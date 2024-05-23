@@ -32,7 +32,7 @@ include_once "../database.php";
         setcookie('email', $user[0]['email'], time() + 3600, '/');
         setcookie('is_admin', $user[0]['type'], time() + 3600, '/');
 
-        header("Location: /");
+        header("Location: ../main/dashboard.php");
       } else {
         echo "Login failed";
       }
