@@ -31,3 +31,27 @@ $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
   } ?>
 
 </table>
+
+<!-- form to add account: email, username, password, type -->
+<form method="post" name="admin_add_account">
+  <label>Add Account</label>
+  Email <input type="text" name="email" required>
+  <br>
+  Username <input type="text" name="username" required>
+  <br>
+  Password <input type="password" name="password" required>
+  <br>
+  Admin <input type="checkbox" name="type">
+  <br>
+  <input type="submit" value="Add">
+</form>
+
+<?php
+if (isset($_REQUEST["email"])) {
+  $email = $_REQUEST["email"];
+  $username = $_REQUEST["username"];
+  $password = $_REQUEST["password"];
+  $type = $_REQUEST["type"] === 'on' ? '1' : '0';
+
+  header("Location: ../admin/add_account.php?admin_add_account=1&email=$email&username=$username&password=$password&type=$type");
+}

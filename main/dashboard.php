@@ -15,20 +15,20 @@ if (!isset($_COOKIE['is_logged_in'])) {
     <script>
       $(document).ready(function () {
         $("nav a").click(function (e) {
-          var page = $(this).attr('href'); // get the href of the clicked link
-          if (page !== "" || !page.includes("logout.php")) { // if the link is not "Home"
-            e.preventDefault(); // prevent the default action
-            $("#main").load(page); // load the content into <main>
-          }
+          let page = $(this).attr('href');
+          if (page === "" || page.includes("logout.php")) return;
+
+          e.preventDefault();
+          $("#main").load(page);
         });
         $(document).on("submit", "form", function (e) {
-          e.preventDefault(); // prevent the default action
+          e.preventDefault();
           $.ajax({
-            url: $(this).attr("action"), // get the action attribute of the form
-            type: $(this).attr("method"), // get the method attribute of the form
-            data: $(this).serialize(), // get the form data
+            url: $(this).attr("action"),
+            type: $(this).attr("method"),
+            data: $(this).serialize(),
             success: function (response) {
-              $("#main").html(response); // load the response into <main>
+              $("#main").html(response);
             }
           });
         });
@@ -44,7 +44,7 @@ if (!isset($_COOKIE['is_logged_in'])) {
     </header>
 
     <nav>
-      <ul>
+      <ul id="nav_list">
         <li><a href="">Home</a></li>
         <?php if (!$_COOKIE['is_admin']) { ?>
           <li><a href="calculate_electricity_bill.php">Calculate Electricity Bill</a></li>
@@ -59,9 +59,6 @@ if (!isset($_COOKIE['is_logged_in'])) {
       </ul>
     </nav>
     <main id="main"></main>
-    <!-- <footer>
-      <p>&copy; <?php echo date("Y"); ?> Your Company</p>
-    </footer> -->
   </body>
 
 </html>
