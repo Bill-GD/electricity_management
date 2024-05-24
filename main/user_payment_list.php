@@ -1,8 +1,5 @@
-<head>
-  <link rel="stylesheet" type="text/css" href="../assets/style.css">
-</head>
-
 <?php
+require_once "page_header.php";
 include_once "../database.php";
 
 $query = "select h.pay_date, h.total_cost, h.electricity_usage"

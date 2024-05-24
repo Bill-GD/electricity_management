@@ -1,8 +1,5 @@
-<head>
-  <link rel="stylesheet" type="text/css" href="../assets/style.css">
-</head>
-
 <?php
+require_once "../main/page_header.php";
 include_once "../database.php";
 
 $query = "select user_id, email, username, `type` from `User` order by user_id desc";

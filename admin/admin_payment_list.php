@@ -1,14 +1,11 @@
-<head>
-  <link rel="stylesheet" type="text/css" href="../assets/style.css">
-</head>
-
 <?php
+require_once "../main/page_header.php";
 include_once "../database.php";
 
 $query = "select h.history_id, h.user_id, u.email, u.username, h.pay_date, h.total_cost, h.electricity_usage"
   . " from `History` as h, `User` as u"
   . " where h.user_id = u.user_id"
-  ." order by history_id desc";
+  . " order by history_id desc";
 $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div>
@@ -21,6 +18,7 @@ $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
       <th scope="col">Pay Date</th>
       <th scope="col">Total Cost</th>
       <th scope="col">Electricity Usage</th>
+      <th scope="col">Action</th>
     </tr>
 
     <?php
@@ -33,6 +31,9 @@ $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
         <td><?php echo $value["pay_date"]; ?></td>
         <td><?php echo $value["total_cost"]; ?></td>
         <td><?php echo $value["electricity_usage"]; ?></td>
+        <td>
+          <a href="../admin/delete_payment.php?history_id=<?php echo $value["history_id"]; ?>">Delete</a>
+        </td>
       </tr>
       <?php
     } ?>

@@ -1,6 +1,6 @@
-<head>
-  <link rel="stylesheet" type="text/css" href="../assets/style.css">
-</head>
+<?php
+require_once "page_header.php";
+?>
 
 <form method="post" action="calculate_electricity_bill.php">
   <label for="amount">Enter Amount:</label>
