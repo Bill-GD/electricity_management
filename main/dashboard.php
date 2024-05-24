@@ -48,9 +48,10 @@ if (!isset($_COOKIE['is_logged_in'])) {
         <?php if (!$_COOKIE['is_admin']) { ?>
           <li><a href="calculate_electricity_bill.php">Calculate Electricity Bill</a></li>
           <li><a href="payment.php">Payment</a></li>
-        <?php } ?>
-        <?php if ($_COOKIE['is_admin']) { ?>
+          <li><a href="user_payment_list.php">History</a></li>
+        <?php } else { ?>
           <li><a href="../admin/manage_account.php">Manage Account</a></li>
+          <li><a href="../admin/admin_payment_list.php">Payment List</a></li>
         <?php } ?>
         <?php if ($_COOKIE['is_logged_in']) { ?>
           <li><a href="../account/logout.php">Log Out</a></li>
