@@ -33,7 +33,6 @@ if (!isset($_COOKIE['is_logged_in'])) {
           });
         });
       });
-
     </script>
   </head>
 

@@ -10,9 +10,9 @@
 </form>
 
 <?php
-function getElectricityCost($kwh_usage) {
+function getElectricityCost(int $kwh_usage) {
   if ($kwh_usage < 0)
-    return -1;
+    return [-1, -1];
 
   $stages = [50, 50, 100, 100, 100, 100]; // difference between stages
   $costs = [1678, 1734, 2014, 2536, 2834, 2927];
@@ -26,7 +26,6 @@ function getElectricityCost($kwh_usage) {
       $totalCost += $usage * $costs[$i];
     } else {
       $totalCost += $kwh_usage * $costs[$i];
-      break;
     }
 
     $kwh_usage -= $usage;
@@ -37,14 +36,15 @@ function getElectricityCost($kwh_usage) {
     $totalCost += $kwh_usage * $costs[count($stages) - 1];
   }
 
-  return round($totalCost * 1.1);
+  return [$totalCost, round($totalCost * 1.1)];
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $amount = $_POST["amount"];
   if (is_numeric($amount)) {
     $cost = getElectricityCost($amount);
-    echo "<p>The electricity cost for $amount kWh is $cost VND</p>";
+    echo "<p>The electricity cost for $amount kWh is {$cost[0]} VND</p>";
+    echo "<p>The cost after tax (10%) is {$cost[1]} VND</p>";
   } else {
     echo "<p>Please enter a valid number</p>";
   }

@@ -79,3 +79,6 @@ form button {
 form button:hover {
   background-color: #0056b3;
 }
+p {
+  text-align: center;
+}
