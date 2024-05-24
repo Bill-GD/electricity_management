@@ -6,7 +6,7 @@ require_once "page_header.php";
   <label for="amount">Enter Amount:</label>
   <input type="number" id="amount" name="amount">
   <br><br>
-  <button type="submit">Calculate</button>
+  <input type="submit" value="Calculate">
 </form>
 
 <?php
@@ -25,12 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["amount"])) {
 ?>
 
 <form method="post" action="calculate_electricity_bill.php">
-  <h3>Update Electricity Usage (Total usage in a month)</h3>
+  <h3>Update Electricity Usage</h3>
+  <h5>(Total usage in a month)</h5>
   <label>Current month: <?php echo date('M Y', time()) ?></label>
   <label for="amount">Enter Amount:</label>
   <input type="number" id="amount" name="usage_amount">
   <br><br>
-  <button type="submit">Register</button>
+  <input type="submit" value="Register">
 </form>
 
 <?php
@@ -43,21 +44,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usage_amount"])) {
     exit;
   }
 
+  $date_full = date('Y-m-d', time());
+  $date_y_m = date('Y-m', time());
+
   if ($usage_amount > 0) {
     echo "<p>Registered $usage_amount kWh</p>";
 
-    // find if there is a record for today
-    $query = "SELECT * FROM `Usage` WHERE user_id = {$_COOKIE['user_id']} AND register_date = '" . date('Y-m-d', time()) . "'";
+    // find if there is a record for this month
+    $query = "SELECT * FROM `Usage` WHERE user_id = {$_COOKIE['user_id']} AND register_date like '{$date_y_m}%'";
     $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
     if (count($result) <= 0) {
-      $query = "INSERT INTO `Usage` (user_id, register_date, electricity_usage) VALUES ({$_COOKIE['user_id']}, '" . date('Y-m-d', time()) . "', $usage_amount)";
+      $query = "INSERT INTO `Usage` (user_id, register_date, electricity_usage) VALUES ({$_COOKIE['user_id']}, '{$date_full}', $usage_amount)";
     } else {
-      $query = "UPDATE `Usage` SET electricity_usage = $usage_amount WHERE user_id = {$_COOKIE['user_id']} AND register_date like '" . date('Y-m', time()) . "%'";
+      $query = "UPDATE `Usage` SET electricity_usage = $usage_amount WHERE user_id = {$_COOKIE['user_id']} AND register_date like '{$date_y_m}%'";
     }
     $db->query($query);
   } else {
-    $query = "DELETE FROM `Usage` WHERE user_id = {$_COOKIE['user_id']} AND register_date like '" . date('Y-m', time()) . "%'";
+    $query = "DELETE FROM `Usage` WHERE user_id = {$_COOKIE['user_id']} AND register_date like '{$date_y_m}%'";
     $db->query($query);
   }
 }

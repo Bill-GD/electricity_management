@@ -1,3 +1,19 @@
+<link rel="stylesheet" type="text/css" href="../assets/style.css">
+<style>
+  body {
+    margin-top: 20px;
+  }
+
+  div {
+    display: flex;
+    max-width: fit-content;
+    text-align: center;
+  }
+
+  form {
+    border: 0;
+  }
+</style>
 <?php
 $user_id = -1;
 $username = '';
@@ -15,24 +31,20 @@ if (isset($_COOKIE['is_logged_in'])) {
 
     header("Location: main/dashboard.php");
     exit;
-  } 
+  }
 } else {
-  echo "Not logged in";
+  echo "<p>Not logged in</p>";
 }
+?>
 
-if ($is_logged_in) { ?>
-  <form action="/account/logout.php" method="get">
-    <input type="submit" value="Logout">
-  </form>
-<?php } else {
-  ?>
+<div>
   <form action="/account/login.php" method="get">
     <input type="submit" value="Login">
   </form>
-<?php } ?>
-<form action="/account/signup.php" method="get">
-  <input type="submit" value="Signup">
-</form>
+  <form action="/account/signup.php" method="get">
+    <input type="submit" value="Signup">
+  </form>
+</div>
 
 <?php
 if ($is_logged_in && $is_admin == 1) {

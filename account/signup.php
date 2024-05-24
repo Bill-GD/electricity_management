@@ -7,10 +7,11 @@ require_once "../helper/helper_methods.php";
   <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../assets/style.css">
   </head>
   <body>
-    <a href="/">Back</a>
     <form method="post">
+      <span><a href="/">Back</a></span>
       Email <input type="text" name="email_signup" required>
       <br>
       Username <input type="text" name="username_signup" required>

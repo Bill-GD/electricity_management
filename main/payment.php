@@ -2,7 +2,13 @@
 require_once "page_header.php";
 require_once "../database.php";
 require_once "../helper/helper_methods.php";
-
+?>
+<style>
+  form {
+    border: 0;
+  }
+</style>
+<?php
 $pay_month = substr(date('Y-m-d', time()), 0, 7);
 $query = "select usage_id, user_id, register_date, electricity_usage from `Usage`"
   . " where user_id = {$_COOKIE['user_id']} and register_date like '{$pay_month}%'"
@@ -31,5 +37,5 @@ if (isset($_POST['pay_submit'])) {
     . " ({$_COOKIE["user_id"]}, '" . date('Y-m-d', time()) . "', {$pay_amount}, {$registered_usage})";
   $db->query($query);
 
-  echo "Payment successful";
+  echo "<p>Payment successful</p>";
 }
