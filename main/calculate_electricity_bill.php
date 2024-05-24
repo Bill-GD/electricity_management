@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["amount"])) {
 
 <form method="post" action="calculate_electricity_bill.php">
   <h3>Update Electricity Usage (Total usage in a month)</h3>
-  <label>Current date: <?php echo date('d-m-Y', time()) ?></label>
+  <label>Current month: <?php echo date('M Y', time()) ?></label>
   <label for="amount">Enter Amount:</label>
   <input type="number" id="amount" name="usage_amount">
   <br><br>
@@ -38,7 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usage_amount"])) {
   include_once "../database.php";
 
   $usage_amount = $_POST["usage_amount"];
-  if (is_numeric($usage_amount) && $usage_amount >= 0) {
+  if (!is_numeric($usage_amount) || $usage_amount < 0) {
+    echo "<p>Please enter a valid number</p>";
+    exit;
+  }
+
+  if ($usage_amount > 0) {
     echo "<p>Registered $usage_amount kWh</p>";
 
     // find if there is a record for today
@@ -47,12 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usage_amount"])) {
 
     if (count($result) <= 0) {
       $query = "INSERT INTO `Usage` (user_id, register_date, electricity_usage) VALUES ({$_COOKIE['user_id']}, '" . date('Y-m-d', time()) . "', $usage_amount)";
-      $db->query($query);
     } else {
       $query = "UPDATE `Usage` SET electricity_usage = $usage_amount WHERE user_id = {$_COOKIE['user_id']} AND register_date like '" . date('Y-m', time()) . "%'";
-      $db->query($query);
     }
+    $db->query($query);
   } else {
-    echo "<p>Please enter a valid number</p>";
+    $query = "DELETE FROM `Usage` WHERE user_id = {$_COOKIE['user_id']} AND register_date like '" . date('Y-m', time()) . "%'";
+    $db->query($query);
   }
 }

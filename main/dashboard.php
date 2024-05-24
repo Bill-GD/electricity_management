@@ -1,5 +1,4 @@
 <?php
-
 if (!isset($_COOKIE['is_logged_in'])) {
   header("Location: /");
   exit;
@@ -22,7 +21,9 @@ if (!isset($_COOKIE['is_logged_in'])) {
           $("#main").load(page);
         });
         $(document).on("submit", "form", function (e) {
-          e.preventDefault();
+          if (page != "payment.php") {
+            e.preventDefault();
+          }
           $.ajax({
             url: $(this).attr("action"),
             type: $(this).attr("method"),
