@@ -38,7 +38,7 @@ include_once "../database.php";
 
         header("Location: ../main/dashboard.php");
       } else {
-        echo "Login failed";
+        echo "<p>Login failed</p>";
       }
     }
     ?>

@@ -43,17 +43,18 @@ require_once "../helper/helper_methods.php";
       add_user($email, $username, $password);
 
       if (isset($_REQUEST["auto_login"])) {
-        if (isset($_REQUEST["auto_login"])) {
-          $is_logged_in = true;
-          setcookie('is_logged_in', $is_logged_in, time() + 3600, '/');
-          setcookie('username', $username, time() + 3600, '/');
-          setcookie('user_id', $db->lastInsertId(), time() + 3600, '/');
-          setcookie('email', $email, time() + 3600, '/');
-          setcookie('is_admin', 0, time() + 3600, '/');
+        $is_logged_in = true;
+        setcookie('is_logged_in', $is_logged_in, time() + 3600, '/');
+        setcookie('username', $username, time() + 3600, '/');
+        setcookie('user_id', $db->lastInsertId(), time() + 3600, '/');
+        setcookie('email', $email, time() + 3600, '/');
+        setcookie('is_admin', 0, time() + 3600, '/');
 
-          header("Location: ../main/dashboard.php");
-          exit;
-        }
+        header("Location: ../main/dashboard.php");
+        exit;
+      } else {
+        header("Location: /");
+        exit;
       }
     }
     ?>

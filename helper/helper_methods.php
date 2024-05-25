@@ -5,7 +5,11 @@ require_once "../database.php";
 function add_user(string $email, string $username, string $password, int $type = 0): void {
   global $db;
 
-  $db->query("INSERT into `User` (`email`, `username`, `password`, `type`) values ('{$email}', '{$username}', '{$password}', $type)");
+  try {
+    $db->query("INSERT into `User` (`email`, `username`, `password`, `type`) values ('{$email}', '{$username}', '{$password}', $type)");
+  } catch (PDOException $e) {
+    echo "<p>Error: " . explode('for', explode('1062', $e->getMessage())[1])[0] . "</p>";
+  }
 }
 
 function getElectricityCost(int $kwh_usage) {
