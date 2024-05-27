@@ -10,7 +10,7 @@ require_once "page_header.php";
 </form>
 
 <?php
-require_once "../helper/helper_methods.php";
+require_once dirname(__DIR__) . "\helper\helper_methods.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["amount"])) {
   $amount = $_POST["amount"];
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["amount"])) {
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usage_amount"])) {
-  include_once "../database.php";
+  include_once dirname(__DIR__) . "/database.php";
 
   $usage_amount = $_POST["usage_amount"];
   if (!is_numeric($usage_amount) || $usage_amount < 0) {

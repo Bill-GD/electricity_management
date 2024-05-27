@@ -1,6 +1,6 @@
 <?php
 
-require_once "../database.php";
+require_once dirname(__DIR__) . "\database.php";
 
 function add_user(string $email, string $username, string $password, int $type = 0): void {
   global $db;
