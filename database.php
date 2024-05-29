@@ -13,6 +13,7 @@ $conn .= ";dbname=elec_manage";
 $conn .= ";sslmode=verify-ca;sslrootcert=ca.pem";
 
 try {
+  global $db;
   $db = new PDO($conn, $fields["user"], $fields["pass"]);
 } catch (Exception $e) {
   echo "Error: " . $e->getMessage();
