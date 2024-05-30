@@ -24,7 +24,7 @@ class User {
       return false;
     }
 
-    if (strlen($password) < 4) {
+    if (strlen($password) < 4 || strlen($password) > 32){
       return false;
     }
 
@@ -47,6 +47,10 @@ class User {
   public function login(PDO &$db, string $password): bool {
     if (empty($password)) {
       // throw new Exception('Email, username, and password are required');
+      return false;
+    }
+
+    if (strlen($password) < 4 || strlen($password) > 32){
       return false;
     }
 
