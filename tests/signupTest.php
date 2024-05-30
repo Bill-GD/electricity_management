@@ -16,7 +16,7 @@ class SignupTest extends TestCase {
     $this->assertTrue($result, "Signup should succeed with valid credentials");
 
     // Cleanup after test
-    $sql = "DELETE FROM User WHERE email = '{$email}'";
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
     $db->query($sql);
   }
 
@@ -34,7 +34,7 @@ class SignupTest extends TestCase {
     }
 
     // Cleanup after test
-    $sql = "DELETE FROM User WHERE email = '{$email}'";
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
     $db->query($sql);
   }
 
@@ -52,7 +52,7 @@ class SignupTest extends TestCase {
     }
 
     // Cleanup after test
-    $sql = "DELETE FROM User WHERE email = '{$email}'";
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
     $db->query($sql);
   }
 
@@ -67,7 +67,7 @@ class SignupTest extends TestCase {
     $this->assertFalse($result, "Signup should fail with empty username");
 
     // Cleanup after test
-    $sql = "DELETE FROM User WHERE email = '{$email}'";
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
     $db->query($sql);
   }
 
@@ -82,7 +82,7 @@ class SignupTest extends TestCase {
     $this->assertFalse($result, "Signup should fail with empty password");
 
     // Cleanup after test
-    $sql = "DELETE FROM User WHERE email = '{$email}'";
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
     $db->query($sql);
   }
 
@@ -100,7 +100,7 @@ class SignupTest extends TestCase {
     }
 
     // Cleanup after test
-    $sql = "DELETE FROM User WHERE email = '{$email}'";
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
     $db->query($sql);
   }
 
@@ -140,7 +140,7 @@ class SignupTest extends TestCase {
     }
 
     // Cleanup after test
-    $sql = "DELETE FROM User WHERE email = '{$email}'";
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
     $db->query($sql);
   }
 }
