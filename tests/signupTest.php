@@ -116,28 +116,6 @@ class SignupTest extends TestCase {
     $db->query($sql);
   }
 
-  // public function testSignupWithEmailDomain() {
-  //   global $db;
-  //   $validEmails = ["testuser@gmail.com", "testuser@st.phenikaa-uni.edu.vn"];
-  //   $username = "testuser";
-  //   $password = "testpassword";
-
-
-  //   foreach ($validEmails as $email) {
-  //     $user = new User($email);
-  //     try {
-  //       $result = $user->signup($email, $username, $password);
-  //       $this->assertTrue($result, "Signup should succeed with valid email domain");
-  //     } catch (Exception $e) {
-  //       $this->fail("Signup should not throw exception with valid email domain");
-  //     }
-
-  //     // Cleanup after test
-  //     $sql = "DELETE FROM User WHERE email = '{$email}'";
-  //     $db->query($sql);
-  //   }
-  // }
-
   public function testSignupWithEmailContainingSpecialCharacters() {
     global $db;
     $email = "testuser!#$%&\'*+-/=?^_`{|}~@gmail.com";
@@ -149,6 +127,21 @@ class SignupTest extends TestCase {
     } catch (Exception $e) {
       $this->assertEquals('Invalid email format', $e->getMessage());
     }
+
+    // Cleanup after test
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
+    $db->query($sql);
+  }
+
+  function testSignupWithLongPassword() {
+    global $db;
+    $email = "testuser@gmail.com";
+    $username = "testuser";
+    $password = "thisisaverylongpasswordthatshouldfail";
+
+    $user = new User($email);
+    $result = $user->signup($db, $username, $password);
+    $this->assertFalse($result, "Signup should fail with password too long");
 
     // Cleanup after test
     $sql = "DELETE FROM `User` WHERE email = '{$email}'";

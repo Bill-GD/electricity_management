@@ -39,7 +39,7 @@ require_once "../../src/helper/helper_methods.php";
       exit;
     }
     if (isset($_POST['password_confirm_signup']) && empty($_POST['password_confirm_signup'])) {
-      echo "<p style='color:red;'>Password confirmation cannot be empty</p>";
+      echo "<p style='color:red;'>You have to confirm the password</p>";
       exit;
     }
 
@@ -55,6 +55,10 @@ require_once "../../src/helper/helper_methods.php";
       }
       if (strlen($password) < 4) {
         echo "<p style='color:red;'>Password should have at least 4 characters</p>";
+        return;
+      }
+      if (strlen($password) > 32) {
+        echo "<p style='color:red;'>Password should have at most 32 characters</p>";
         return;
       }
       if ($password != $password_confirm) {
