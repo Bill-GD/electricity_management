@@ -64,7 +64,12 @@ require_once "../../src/helper/helper_methods.php";
       // }
     
       $new_user = new User($email);
-      $new_user->signup($db, $username, $password);
+      $successful = $new_user->signup($db, $username, $password);
+
+      if (!$successful) {
+        echo "<p style='color:red;'>Signup failed</p>";
+        exit;
+      }
 
       if (isset($_REQUEST["auto_login"])) {
         $is_logged_in = true;
