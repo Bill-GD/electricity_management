@@ -25,7 +25,7 @@ $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
         <td>
           <!-- <a href="edit_account.php?id=<?php echo $value["user_id"]; ?>">Edit</a> -->
           <?php if ($value["type"] === 0) { ?>
-            <a href="../../src/admin/delete_account.php?user_id=<?php echo $value["user_id"]; ?>">Delete</a>
+            <a href="delete_account.php?user_id=<?php echo $value["user_id"]; ?>">Delete</a>
           <?php } ?>
         </td>
       </tr>
