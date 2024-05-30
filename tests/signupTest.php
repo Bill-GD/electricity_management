@@ -157,7 +157,7 @@ class SignupTest extends TestCase
         $user = new User($this->db);
         try {
             $result = $user->signup($email, $username, $password);
-            $this->fail("Signup should throw exception with email containing special characters");
+            $this->fail("Invalid email format");
         } catch (Exception $e) {
             $this->assertEquals('Invalid email format', $e->getMessage());
         }

@@ -52,11 +52,6 @@ require_once "../helper/helper_methods.php";
         return;
       }
     
-
-      if (!preg_match("/^[a-zA-Z0-9. _%+-]+@[a-zA-Z0-9. -]+\\.[a-zA-Z]{2,}$/", $email)) {
-        echo "Invalid email address.";
-        return;
-      }
       if ($password != $password_confirm) {
         echo "Password does not match";
         return;

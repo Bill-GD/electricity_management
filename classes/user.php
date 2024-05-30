@@ -24,13 +24,6 @@ class User
       throw new Exception('Invalid email format');
     }
 
-    // Disallow special characters in email
-
-    if (!preg_match('/^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email)) {
-      throw new Exception('Email cannot contain special characters');
-    }
-
-
     // Check if a user already exists with the given email or username
     $sql = "SELECT * FROM User WHERE email = ? OR username = ?";
     $stmt = $this->db->prepare($sql);
