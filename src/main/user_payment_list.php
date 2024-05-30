@@ -1,6 +1,6 @@
 <?php
 require_once "page_header.php";
-include_once "../database.php";
+include_once "../../database.php";
 
 $query = "select h.pay_date, h.total_cost, h.electricity_usage"
   . " from `History` as h, `User` as u"

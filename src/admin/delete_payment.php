@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_REQUEST) && isset($_REQUEST['history_id'])) {
-  include_once "../database.php";
+  include_once "../../database.php";
 
   $history_id = $_REQUEST['history_id'];
 

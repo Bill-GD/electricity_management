@@ -1,6 +1,6 @@
 <?php
-require_once "../main/page_header.php";
-include_once "../database.php";
+require_once "../../src/main/page_header.php";
+include_once "../../database.php";
 
 $query = "select h.history_id, h.user_id, u.email, u.username, h.pay_date, h.total_cost, h.electricity_usage"
   . " from `History` as h, `User` as u"
@@ -32,7 +32,7 @@ $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
         <td><?php echo $value["total_cost"]; ?></td>
         <td><?php echo $value["electricity_usage"]; ?></td>
         <td>
-          <a href="../admin/delete_payment.php?history_id=<?php echo $value["history_id"]; ?>">Delete</a>
+          <a href="../../src/admin/delete_payment.php?history_id=<?php echo $value["history_id"]; ?>">Delete</a>
         </td>
       </tr>
       <?php

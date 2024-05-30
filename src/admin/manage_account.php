@@ -1,6 +1,6 @@
 <?php
-require_once "../main/page_header.php";
-include_once "../database.php";
+require_once "../../src/main/page_header.php";
+include_once "../../database.php";
 
 $query = "select user_id, email, username, `type` from `User` order by user_id desc";
 $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
@@ -25,7 +25,7 @@ $result = $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
         <td>
           <!-- <a href="edit_account.php?id=<?php echo $value["user_id"]; ?>">Edit</a> -->
           <?php if ($value["type"] === 0) { ?>
-            <a href="../admin/delete_account.php?user_id=<?php echo $value["user_id"]; ?>">Delete</a>
+            <a href="../../src/admin/delete_account.php?user_id=<?php echo $value["user_id"]; ?>">Delete</a>
           <?php } ?>
         </td>
       </tr>

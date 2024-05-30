@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="../assets/style.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/style.css">
   </head>
 
   <body>
@@ -19,11 +19,11 @@
           <li><a href="payment.php">Payment</a></li>
           <li><a href="user_payment_list.php">History</a></li>
         <?php } else { ?>
-          <li><a href="../admin/manage_account.php">Manage Account</a></li>
-          <li><a href="../admin/admin_payment_list.php">Payment List</a></li>
+          <li><a href="../../src/admin/manage_account.php">Manage Account</a></li>
+          <li><a href="../../src/admin/admin_payment_list.php">Payment List</a></li>
         <?php } ?>
         <?php if ($_COOKIE['is_logged_in']) { ?>
-          <li><a href="../account/logout.php">Log Out</a></li>
+          <li><a href="../../src/account/logout.php">Log Out</a></li>
         <?php } ?>
       </ul>
     </nav>

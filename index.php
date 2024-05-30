@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="../assets/style.css">
+<link rel="stylesheet" type="text/css" href="../../assets/style.css">
 <style>
   body {
     margin-top: 20px;
@@ -29,7 +29,7 @@ if (isset($_COOKIE['is_logged_in'])) {
     $email = $_COOKIE['email'];
     $is_admin = $_COOKIE['is_admin'];
 
-    header("Location: main/dashboard.php");
+    header("Location: src/main/dashboard.php");
     exit;
   }
 } else {
@@ -38,10 +38,10 @@ if (isset($_COOKIE['is_logged_in'])) {
 ?>
 
 <div>
-  <form action="/account/login.php" method="get">
+  <form action="/src/account/login.php" method="get">
     <input type="submit" value="Login">
   </form>
-  <form action="/account/signup.php" method="get">
+  <form action="/src/account/signup.php" method="get">
     <input type="submit" value="Signup">
   </form>
 </div>
@@ -49,7 +49,7 @@ if (isset($_COOKIE['is_logged_in'])) {
 <?php
 if ($is_logged_in && $is_admin == 1) {
   ?>
-  <form action="/admin/manage_account.php" method="get">
+  <form action="/src/admin/manage_account.php" method="get">
     <input type="submit" value="Manage account">
   </form>
 <?php } ?>
