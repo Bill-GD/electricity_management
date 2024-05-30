@@ -19,6 +19,21 @@ class SignupTest extends TestCase {
     $sql = "DELETE FROM `User` WHERE email = '{$email}'";
     $db->query($sql);
   }
+  public function testSignupWithShortPassword() {
+    global $db;
+    $email = "testuser@gmail.com";
+    $username = "testuser";
+    $password = "pas";
+
+    $user = new User($email);
+    $result = $user->signup($db, $username, $password);
+
+    $this->assertFalse($result, "Signup should fail with password of length less than 4");
+
+    // Cleanup after test
+    $sql = "DELETE FROM `User` WHERE email = '{$email}'";
+    $db->query($sql);
+  }
 
   public function testSignupWithEmptyCredentials() {
     global $db;
@@ -27,8 +42,7 @@ class SignupTest extends TestCase {
     $password = "";
 
     try {
-      $user = new User($email);
-      $user->signup($db, $username, $password);
+      new User($email);
     } catch (Exception $e) {
       $this->assertEquals('Email is required', $e->getMessage());
     }
@@ -45,8 +59,7 @@ class SignupTest extends TestCase {
     $password = "testpassword";
 
     try {
-      $user = new User($email);
-      $user->signup($db, $username, $password);
+      new User($email);
     } catch (Exception $e) {
       $this->assertEquals('Email is required', $e->getMessage());
     }
@@ -93,8 +106,7 @@ class SignupTest extends TestCase {
     $password = "testpassword";
 
     try {
-      $user = new User($email);
-      $user->signup($db, $username, $password);
+      new User($email);
     } catch (Exception $e) {
       $this->assertEquals('Invalid email format', $e->getMessage());
     }
@@ -133,8 +145,7 @@ class SignupTest extends TestCase {
     $password = "testpassword";
 
     try {
-      $user = new User($email);
-      $user->signup($db, $username, $password);
+      new User($email);
     } catch (Exception $e) {
       $this->assertEquals('Invalid email format', $e->getMessage());
     }

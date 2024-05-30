@@ -53,6 +53,10 @@ require_once "../../src/helper/helper_methods.php";
         echo "<p style='color:red;'>Invalid email address.</p>";
         return;
       }
+      if (strlen($password) < 4) {
+        echo "<p style='color:red;'>Password should have at least 4 characters</p>";
+        return;
+      }
       if ($password != $password_confirm) {
         echo "<p style='color:red;'>Password does not match</p>";
         return;

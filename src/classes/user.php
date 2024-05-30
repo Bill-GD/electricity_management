@@ -24,6 +24,10 @@ class User {
       return false;
     }
 
+    if (strlen($password) < 4) {
+      return false;
+    }
+
     // Check if a user already exists with the given email or username
     $sql = "SELECT * FROM `User` WHERE email = '{$this->email}' OR username = '{$username}'";
     $user = $db->query($sql)->fetch();
@@ -50,13 +54,13 @@ class User {
     $sql = "SELECT * FROM `User` WHERE email = '{$this->email}' AND `password` = '{$password}'";
     $user = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-    $this->username = $user['username'];
-    $this->user_id = $user['user_id'];
-    $this->type = $user['type'];
-
     if (!$user) {
       return false;
     }
+
+    $this->username = $user['username'];
+    $this->user_id = $user['user_id'];
+    $this->type = $user['type'];
     return true;
   }
 }
