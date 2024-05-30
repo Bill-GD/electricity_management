@@ -3,8 +3,5 @@
     "phpunit/phpunit": "^11.1",
     "phpunit/php-code-coverage": "^11.0",
     "ext-xdebug": "*"
-  },
-  "require": {
-    "guzzlehttp/guzzle": "^7.8"
   }
 }
