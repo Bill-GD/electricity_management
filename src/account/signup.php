@@ -1,6 +1,7 @@
 <?php
 include_once "../../database.php";
 require_once "../../src/helper/helper_methods.php";
+require_once "../../src/classes/user.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
